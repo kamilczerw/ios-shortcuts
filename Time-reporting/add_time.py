@@ -4,12 +4,16 @@ import console
 import webbrowser
 import report_time
 import argparse
+import datetime
 
 def update_popup():
 	dialogs.input_alert('Update', '')
 
 def insert_popup():
-	dialogs.input_alert('Worked hours', 'hours', '08:00')
+	date = datetime.datetime.now()
+	hours = dialogs.input_alert('Worked hours', 'hours', '08:00')
+	
+	return date, hours
 
 def main():
 	console.clear()
@@ -25,8 +29,10 @@ def main():
 	if args.update:
 		update_popup()
 	else:
-		insert_popup()
+		date, hours = insert_popup()
 	
+	print(date)
+	print(hours)
 	#hours = dialogs.input_alert('Worked hours', 'hours', '08:00')
 	# callback = sys.argv[-1] + '?x-source=Pythonista3&hours=' + hours
 
@@ -34,7 +40,7 @@ def main():
 	
 	# print(callback)
 	
-	# webbrowser.open(callback)
+	webbrowser.open(args.callback)
 	
 
 if __name__ == '__main__':
